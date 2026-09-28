@@ -1,0 +1,51 @@
+{
+  "name": "fp-sokoban",
+  "version": "0.0.1",
+  "description": "functional Sokoban game library and terminal game",
+  "homepage": "https://github.com/afrontend/fp-sokoban",
+  "author": {
+    "name": "afrontend",
+    "email": "autoscripts@gmail.com",
+    "url": "https://afrontend.github.io"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "main": "lib/index.js",
+  "bin": {
+    "fp-sokoban": "src/example.js"
+  },
+  "keywords": [
+    "javascript",
+    "sokoban",
+    "game",
+    "functional-programming"
+  ],
+  "scripts": {
+    "pretest": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "node ./src/example.js",
+    "generate": "node ./src/generate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/afrontend/fp-sokoban.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "clear": "^0.1.0",
+    "fp-panel": "^0.1.4",
+    "keypress": "^0.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.4.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.5",
+    "prettier": "^3.0.0",
+    "vitest": "^4.1.7"
+  }
+}
