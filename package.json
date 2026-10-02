@@ -27,7 +27,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "start": "node ./src/example.js",
-    "generate": "node ./src/generate.js"
+    "generate": "node ./src/generate.js",
+    "add-level": "node ./src/append.js --count 1",
+    "levels:append": "node ./src/append.js"
   },
   "repository": {
     "type": "git",
