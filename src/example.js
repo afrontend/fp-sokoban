@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-const chalk = require("chalk");
-const clear = require("clear");
-const keypress = require("keypress");
+const { inspect, styleText } = require("node:util");
+const readline = require("node:readline");
 const game = require("../lib/index.js");
+
+// 화면 지우기 + 커서를 맨 위로 (clear 패키지와 같은 시퀀스)
+const clear = () => process.stdout.write("\x1b[2J\x1b[0f");
 
 const HELP_TEXT = [
   "",
@@ -20,7 +22,7 @@ const HELP_TEXT = [
 ].join("\r\n");
 
 const colorCell = (color, symbol) =>
-  typeof chalk[color] === "function" ? chalk[color](symbol) : symbol;
+  Object.hasOwn(inspect.colors, color) ? styleText(color, symbol) : symbol;
 
 const SYMBOLS = {
   grey: "  ",
@@ -51,7 +53,7 @@ const setMessage = (message) => {
 
 const render = () => {
   clear();
-  console.log(chalk.bold.yellow("fp-sokoban\r\n"));
+  console.log(styleText(["bold", "yellow"], "fp-sokoban\r\n"));
   console.log(
     `레벨 ${gameContext.state.levelNumber}/${game.getLevelCount()} ` +
       `— ${gameContext.state.levelName} (${gameContext.state.difficulty})\r\n`,
@@ -61,10 +63,13 @@ const render = () => {
     `\r\n크기: ${gameContext.state.rows}×${gameContext.state.columns}  ` +
       `이동: ${gameContext.state.moves}  밀기: ${gameContext.state.pushes}`,
   );
-  if (gameContext.state.paused) console.log(chalk.yellow("일시정지"));
+  if (gameContext.state.paused) console.log(styleText("yellow", "일시정지"));
   if (gameContext.state.isCleared) {
     console.log(
-      chalk.bold.green("레벨을 완료했습니다! r 키로 다시 시작하세요."),
+      styleText(
+        ["bold", "green"],
+        "레벨을 완료했습니다! r 키로 다시 시작하세요.",
+      ),
     );
   }
   if (gameContext.showHelp) console.log(HELP_TEXT);
@@ -74,7 +79,7 @@ const render = () => {
     );
   }
   if (Date.now() < gameContext.messageUntil) {
-    console.log(chalk.cyan(gameContext.message));
+    console.log(styleText("cyan", gameContext.message));
   }
 };
 
@@ -124,7 +129,7 @@ const load = () => {
   }
 };
 
-keypress(process.stdin);
+readline.emitKeypressEvents(process.stdin);
 process.stdin.on("keypress", (character, key) => {
   if (key?.ctrl && key.name === "c") process.exit();
   if (key?.ctrl && key.name === "d") {

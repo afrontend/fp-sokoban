@@ -34,7 +34,7 @@ ESLint + Prettier are configured in `eslint.config.js`; `pretest` runs ESLint, s
 - `lib/solver.js` — deadlock detection, `solve`, `getHint`, `evaluateDifficulty`
 - `lib/generator.js` — random level candidates, validation, scoring, canonicalization
 - `lib/__tests__/` — `fpSokoban`, `levelsSolver`, `generator` tests
-- `src/example.js` — terminal game; `src/generate.js` + `src/generator-worker.js` + `src/append.js` — level generation CLI
+- `src/example.js` — terminal game (Node built-ins only: `util.styleText`, `readline.emitKeypressEvents`, ANSI clear — the sole runtime dependency is `fp-panel`); `src/generate.js` + `src/generator-worker.js` + `src/append.js` — level generation CLI
 
 ## Architecture
 
