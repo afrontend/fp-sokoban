@@ -40,7 +40,7 @@ ESLint + Prettier are configured in `eslint.config.js`; `pretest` runs ESLint, s
 - `scripts/autoplay.js`, `scripts/make-demo.sh` — demo GIF: replays the built-in A* solver on levels 1–7
 - `.github/workflows/demo.yml` — on push to `main`, regenerates the demo GIF (asciinema/agg are pinned by version + sha256; bump both together)
 - `.github/workflows/test.yml` — `npm test` on push to `main` and on PRs (incl. Dependabot)
-- Actions are pinned to commit SHAs with a `# vN` comment and updated via Dependabot (`.github/dependabot.yml`: github-actions + npm, monthly); keep the SHA pin when editing by hand. CI runs Node 24.
+- Actions are pinned to commit SHAs with a `# vN` comment and updated via Dependabot (`.github/dependabot.yml`: github-actions + npm, monthly); keep the SHA pin when editing by hand. CI runs Node 24. `actions/checkout` uses `persist-credentials: false`; only the final README push step in `demo.yml` gets `GH_TOKEN` (via `gh auth setup-git`).
 
 ## Architecture
 
