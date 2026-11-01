@@ -40,7 +40,7 @@ ESLint + Prettier are configured in `eslint.config.js`; `pretest` runs ESLint, s
 
 Levels are string maps: `#` wall, `@` player, `$` box, `.` goal, `*` box on goal, `+` player on goal, space floor.
 
-Follows the shared API of the other game libraries (fp-tetris / fp-block / fp-snake / fp-space), with level-based init:
+Follows the shared API of the other game libraries (fp-tetris / fp-block / fp-snake), with level-based init:
 
 | Export | Description |
 |---|---|
