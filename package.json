@@ -10,7 +10,8 @@
   },
   "files": [
     "lib",
-    "src"
+    "src",
+    "!**/__tests__"
   ],
   "main": "lib/index.js",
   "bin": {
@@ -29,7 +30,8 @@
     "start": "node ./src/example.js",
     "generate": "node ./src/generate.js",
     "add-level": "node ./src/append.js --count 1",
-    "levels:append": "node ./src/append.js"
+    "levels:append": "node ./src/append.js",
+    "demo-gif": "bash scripts/make-demo.sh"
   },
   "repository": {
     "type": "git",

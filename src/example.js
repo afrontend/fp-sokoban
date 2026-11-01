@@ -1,7 +1,8 @@
 #!/usr/bin/env node
-const { inspect, styleText } = require("node:util");
+const { styleText } = require("node:util");
 const readline = require("node:readline");
 const game = require("../lib/index.js");
+const { format } = require("./format.js");
 
 // 화면 지우기 + 커서를 맨 위로 (clear 패키지와 같은 시퀀스)
 const clear = () => process.stdout.write("\x1b[2J\x1b[0f");
@@ -20,23 +21,6 @@ const HELP_TEXT = [
   "  ^D               스냅숏 JSON 출력 후 종료",
   "  q / ^C           종료",
 ].join("\r\n");
-
-const colorCell = (color, symbol) =>
-  Object.hasOwn(inspect.colors, color) ? styleText(color, symbol) : symbol;
-
-const SYMBOLS = {
-  grey: "  ",
-  [game.COLORS.wall]: colorCell(game.COLORS.wall, "██"),
-  [game.COLORS.target]: colorCell(game.COLORS.target, "··"),
-  [game.COLORS.crate]: colorCell(game.COLORS.crate, "▣ "),
-  [game.COLORS.crateOnTarget]: colorCell(game.COLORS.crateOnTarget, "▣ "),
-  [game.COLORS.player]: colorCell(game.COLORS.player, "● "),
-};
-
-const format = (panel) =>
-  panel
-    .map((row) => row.map((cell) => SYMBOLS[cell.color] ?? "? ").join(""))
-    .join("\r\n");
 
 const gameContext = {
   state: game.initLevel(1),

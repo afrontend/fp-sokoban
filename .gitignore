@@ -2,3 +2,5 @@ node_modules
 coverage
 generated/*.json
 .ua/
+demo.cast
+demo.gif

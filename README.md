@@ -2,6 +2,8 @@
 
 `fp-panel` 기반의 함수형 소코반 라이브러리 및 터미널 게임입니다.
 
+![demo](https://github.com/afrontend/fp-sokoban/releases/download/demo-assets/demo.gif)
+
 ## 설치
 
 ```sh
@@ -185,3 +187,31 @@ state = game.restoreState(snapshot);
 ```
 
 자세한 설계는 [PLAN.md](PLAN.md)를 참고하세요.
+
+## Demo GIF 업데이트
+
+터미널 동작 미리보기를 자동으로 재생성합니다.
+
+```sh
+# 의존 도구 설치 (최초 1회)
+brew install asciinema
+brew install agg
+brew install gh && gh auth login
+
+# 데모 생성 및 GitHub Releases 업로드
+npm run demo-gif
+```
+
+`npm run demo-gif` 실행 순서:
+
+1. `scripts/autoplay.js` — 내장 A* Solver 로 레벨 1–7 을 차례로 풀고 자동 종료
+2. `asciinema rec` — 터미널 출력을 `demo.cast`로 녹화
+3. `agg` — `demo.cast` → `demo.gif` 변환
+4. `gh release upload` — GitHub Releases `demo-assets` 태그에 업로드
+5. `README.md` — GIF URL을 GitHub Releases 경로로 교체
+
+main 브랜치에 푸시하면 `.github/workflows/demo.yml`이 위 과정을 자동으로 실행합니다.
+
+## License
+
+MIT
