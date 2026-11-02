@@ -42,7 +42,7 @@
     "node": ">=22"
   },
   "dependencies": {
-    "fp-panel": "^0.1.5"
+    "fp-panel": "^0.1.6"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

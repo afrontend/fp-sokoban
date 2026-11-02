@@ -34,7 +34,7 @@ ESLint + Prettier are configured in `eslint.config.js`; `pretest` runs ESLint, s
 - `lib/levels.js` — built-in levels (`LEVELS`) and panel size tiers (`SIZE_TIERS`)
 - `lib/solver.js` — deadlock detection, `solve`, `getHint`, `evaluateDifficulty`
 - `lib/generator.js` — random level candidates, validation, scoring, canonicalization
-- `lib/__tests__/` — `fpSokoban`, `levelsSolver`, `generator` tests
+- `lib/__tests__/` — `fpSokoban`, `levelsSolver`, `generator` tests; `contract.test.js` runs the shared contract from `fp-panel/testing` (`runGameContract`, level-sized and turn-based)
 - `src/example.js` — terminal game (Node built-ins only: `util.styleText`, `readline.emitKeypressEvents`, ANSI clear — the sole runtime dependency is `fp-panel`); `src/generate.js` + `src/generator-worker.js` + `src/append.js` — level generation CLI
 - `src/format.js` — terminal renderer shared by `src/example.js` and `scripts/autoplay.js`
 - `scripts/autoplay.js`, `scripts/make-demo.sh` — demo GIF: replays the built-in A* solver on levels 1–7
