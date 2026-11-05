@@ -11,7 +11,8 @@ const game = require("../lib/index.js");
 const clear = () => process.stdout.write("\x1b[2J\x1b[0f");
 
 const FRAME_INTERVAL_MS = 200;
-const LAST_LEVEL = Math.min(7, game.getLevelCount());
+// 새 레벨은 풀이가 길어 앞 4개만 녹화한다 (약 170 수, GIF 20초 안팎).
+const LAST_LEVEL = Math.min(4, game.getLevelCount());
 // Frames to hold the cleared board before moving on.
 const CLEAR_HOLD_FRAMES = 6;
 

@@ -10,8 +10,9 @@ const { LEVELS, SIZE_TIERS } = require("../lib/levels.js");
 const ROOT = path.resolve(__dirname, "..");
 const LEVELS_PATH = path.join(ROOT, "lib", "levels.js");
 
-// evaluateDifficulty 의 경계에서 역산한 최소 밀기 수.
-const DIFFICULTY_FLOORS = { easy: 1, normal: 3, hard: 7, expert: 13 };
+// 생성 단계에서 먼저 거르는 최소 밀기 수. 난이도는 탐색량(evaluateDifficulty)
+// 으로 정해지므로 여기서는 너무 짧은 후보만 버린다.
+const DIFFICULTY_FLOORS = { easy: 1, normal: 2, hard: 4, expert: 6 };
 const DIFFICULTY_RANKS = ["easy", "normal", "hard", "expert"];
 
 const rankOf = (difficulty) => DIFFICULTY_RANKS.indexOf(difficulty);
@@ -86,10 +87,10 @@ fp-sokoban 레벨 추가 파이프라인
   --difficulty <등급>   easy|normal|hard|expert — 이 등급만 채택한다
                         (기본: 대상 티어의 기존 난이도를 하한으로 사용)
   --crates <n>          상자 수 (기본: 대상 티어의 최대 상자 수)
-  --min-pushes <n>      최소 밀기 수 (기본: 난이도 하한에서 역산)
+  --min-pushes <n>      최소 밀기 수 (기본: easy 1·normal 2·hard 4·expert 6)
   --min-moves <n>       최소 이동 수
   --reverse-steps <n>   역방향 당기기 목표 횟수 (기본: min-pushes 기준 자동)
-  --wall-ratio <n>      내부 벽 비율 (기본 0.18)
+  --wall-ratio <n>      내부 벽 비율 (기본 0.3, 최대 0.3)
 
 실행:
   --minutes <n>         생성 시간 예산 (기본 10)
@@ -286,11 +287,11 @@ const generateCandidates = (options, wanted, filter) => {
     fingerprint: generator.canonicalizeLevel(level.map),
   }));
   const margin = Math.max(2, Math.ceil(wanted / 2));
-  // generateLevels 의 내부 카운트는 난이도 필터를 모르므로 여유를 둔다.
-  // 실제 종료는 아래 shouldStop 이 결정한다.
+  // generateLevels 의 내부 카운트는 난이도 필터를 모른다. 어려운 등급은 드물게
+  // 나오므로 개수로 끊지 않고 shouldStop 과 시간 예산으로만 끝낸다.
   const request = {
     ...options,
-    count: seeded.length + (wanted + margin) * 4,
+    count: Number.MAX_SAFE_INTEGER,
   };
 
   console.log(

@@ -39,7 +39,7 @@ fp-sokoban 랜덤 레벨 생성기
   --max-nodes <n>       후보당 Solver 탐색 한도 (기본 100000)
   --min-pushes <n>      최소 밀기 수 (기본 4)
   --min-moves <n>       최소 이동 수 (기본 10)
-  --wall-ratio <n>      내부 벽 비율 (기본 0.18)
+  --wall-ratio <n>      내부 벽 비율 (기본 0.3, 최대 0.3)
   --reverse-steps <n>   역방향 이동 목표 횟수 (기본 18)
   --max-attempts <n>    최대 후보 시도 수
   --output <path>       결과 JSON (기본 generated/levels.json)

@@ -32,12 +32,12 @@ ESLint + Prettier are configured in `eslint.config.js`; `pretest` runs ESLint, s
 
 - `lib/index.js` — game state machine and public API (CJS, hand-written source)
 - `lib/levels.js` — built-in levels (`LEVELS`) and panel size tiers (`SIZE_TIERS`)
-- `lib/solver.js` — deadlock detection, `solve`, `getHint`, `evaluateDifficulty`
+- `lib/solver.js` — deadlock detection, `solve`, `getHint`, `evaluateDifficulty` (by search effort `explored`, not pushes: easy < 20 ≤ normal < 300 ≤ hard < 5000 ≤ expert)
 - `lib/generator.js` — random level candidates, validation, scoring, canonicalization
 - `lib/__tests__/` — `fpSokoban`, `levelsSolver`, `generator` tests; `contract.test.js` runs the shared contract from `fp-panel/testing` (`runGameContract`, level-sized and turn-based)
 - `src/example.js` — terminal game (Node built-ins only: `util.styleText`, `readline.emitKeypressEvents`, ANSI clear — the sole runtime dependency is `fp-panel`); `src/generate.js` + `src/generator-worker.js` + `src/append.js` — level generation CLI
 - `src/format.js` — terminal renderer shared by `src/example.js` and `scripts/autoplay.js`
-- `scripts/autoplay.js`, `scripts/make-demo.sh` — demo GIF: replays the built-in A* solver on levels 1–7
+- `scripts/autoplay.js`, `scripts/make-demo.sh` — demo GIF: replays the built-in A* solver on levels 1–4
 - `.github/workflows/demo.yml` — on push to `main`, regenerates the demo GIF (asciinema/agg are pinned by version + sha256; bump both together)
 - `.github/workflows/test.yml` — `npm test` on push to `main` and on PRs (incl. Dependabot)
 - Actions are pinned to commit SHAs with a `# vN` comment and updated via Dependabot (`.github/dependabot.yml`: github-actions + npm, monthly); keep the SHA pin when editing by hand. CI runs Node 24. `actions/checkout` uses `persist-credentials: false`; only the final README push step in `demo.yml` gets `GH_TOKEN` (via `gh auth setup-git`).
